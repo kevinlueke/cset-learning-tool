@@ -36,11 +36,11 @@ VALUES ('CSET 105', 'Intro to Web Applications'),
        ('CSET 280', 'Capstone Project');
 
 INSERT INTO concepts (course_id, title, body)
-VALUES (1, 'Programming Concepts', "Information about bits, numbers, encoding, etc."),
-       (1, 'Values, Types, and Operators', "Information about values, types, operators, etc.");
+VALUES (1, 'Programming Concepts', 'Information about bits, numbers, encoding, etc.'),
+       (1, 'Values, Types, and Operators', 'Information about values, types, operators, etc.');
 
 INSERT INTO questions (concept_id, question, clue, ans, res_a, res_b, res_c, res_d)
-VALUES (1, "What is your quest?", NULL, "To find the Holy Grail", "To find the Holy Grail", "To find the cure for smelling of elderberries", NULL, NULL);
+VALUES (1, 'What is your quest?', NULL, 'To find the Holy Grail', 'To find the Holy Grail', 'To find the cure for smelling of elderberries', NULL, NULL);
 
 INSERT INTO student_questions (student_id, question_id)
 VALUES (3, 1);

@@ -21,18 +21,18 @@ CREATE TABLE roles (
 CREATE TABLE classes (
   id bigserial PRIMARY KEY,
   class_name varchar(25) NOT NULL
-)
+);
 
 -- Users
 CREATE TABLE users (
   id bigserial PRIMARY KEY,
   email varchar(100) UNIQUE NOT NULL,
-  password varchar(255) UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
   first_name varchar(100) NOT NULL,
   last_name varchar(100) NOT NULL,
-  class bigint REFERENCES class(id) ON DELETE CASCADE,
-  role int REFERENCES role(id) ON DELETE CASCADE,
-  confirmed boolean DEFAULT 0
+  class bigint REFERENCES classes(id) ON DELETE CASCADE,
+  role int REFERENCES roles(id) ON DELETE CASCADE,
+  confirmed boolean DEFAULT FALSE
 );
 
 -- Courses
@@ -46,7 +46,8 @@ CREATE TABLE courses (
 CREATE TABLE concepts (
   id bigserial PRIMARY KEY,
   course_id bigint REFERENCES courses(id) NOT NULL,
-  body text
+  title varchar(50) NOT NULL,
+  body text NOT NULL
 );
 
 -- Questions
