@@ -59,6 +59,10 @@
 }
 
 .courseContent{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-left: 34vw;
   margin-right: 1.5rem;
 }
@@ -66,10 +70,20 @@
   color:#eefbfb;
   padding-bottom: 1rem;
   border-bottom: 1px solid white;
-  text-align: center;
+  text-align: left;
 }
 .courseContent p {
   padding: 40px 20px;
   background-color:#eefbfb;
-  margin: 5rem 0 10rem 0;
+  margin: 5rem 0 5rem 0;
+}
+
+.courseContent button {
+  margin: 1rem 0 5rem 0;
+  padding: 10px 20px;
+}
+
+.courseContent button:hover {
+  background-color: rgb(100,100,100);
+  color: rgb(255,255,255);
 }
