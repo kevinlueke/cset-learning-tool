@@ -27,7 +27,7 @@ CREATE TABLE classes (
 CREATE TABLE users (
   id bigserial PRIMARY KEY,
   email varchar(100) UNIQUE NOT NULL,
-  password varchar(255) UNIQUE NOT NULL,
+  password varchar(255) NOT NULL,
   first_name varchar(100) NOT NULL,
   last_name varchar(100) NOT NULL,
   class bigint REFERENCES class(id) ON DELETE CASCADE,
