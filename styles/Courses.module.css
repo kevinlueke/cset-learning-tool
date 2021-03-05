@@ -1,0 +1,75 @@
+.pageTitle {
+  color: #eefbfb;
+  margin-left:35vw;
+  margin-bottom: 10rem;
+}
+
+.courseAside, .courseAside2 {
+  background-color: #12232e;
+  position: fixed;
+  top:0;left:0;bottom: 0;
+  border-right: 1px solid black;
+  width: 13vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.special{
+  background-color: #4da8da;
+  color: #203647;
+}
+
+.courseAside a {
+  color: #eefbfb;
+  padding: .75vh 0;
+  text-align: center;
+  background-color: #203647;
+  width: 80%;
+  margin: 5px auto;
+}
+
+.courseAside a:hover{
+  background-color: #4da8da;
+  color: #203647;
+  box-shadow: 0 0 5px 3px #eefbfb;
+}
+
+.conceptDiv {
+  position: fixed;
+  top: 0;left: 13vw; bottom: 0;
+  width: 18vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #203647;
+  align-items: center;
+}
+
+.conceptDiv a {
+  padding: 1rem 0;
+  margin: 5px auto;
+  text-align: center;
+  color: #eefbfb;
+}
+
+.conceptDiv a:hover{
+  color: #4da8da;
+}
+
+.courseContent{
+  margin-left: 34vw;
+  margin-right: 1.5rem;
+}
+.courseContent h2 {
+  color:#eefbfb;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid white;
+  text-align: center;
+}
+.courseContent p {
+  padding: 40px 20px;
+  background-color:#eefbfb;
+  margin: 5rem 0 10rem 0;
+}
