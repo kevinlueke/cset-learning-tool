@@ -15,7 +15,7 @@ import styles from '../../styles/course.module.css'
 //
 // const sectionData = conceptD.map((conData)=>
 //     <div><h2 id={conData.id} key={conData.id}>{conData.title}</h2>
-//     <p>{conData.data}</p></div>
+//     <p>{conData.data}</p><button type="button" name="">Take Concept Quiz</button></div>
 // )
 
 export default function cset_105(){
@@ -34,7 +34,7 @@ export default function cset_105(){
     </div>
 
     <section className={styles.courseContent}>
-  
+
     </section>
 
     </main>
