@@ -3,7 +3,7 @@ const { Pool } = require('pg')
 const pool = new Pool({
   host: 'localhost',
   database: 'clt_test',
-  password: ' ',
+  password: '',
 })
 
 module.exports = {
