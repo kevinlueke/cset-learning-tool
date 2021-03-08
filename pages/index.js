@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/Home.module.css'
-import React, { useState } from "react";
 const db = require('../db')
+import React, { useState } from "react";
+import RegisterForm from '../components/register'
+import LoginForm from '../components/login'
 
 export async function getStaticProps () {
   const query = {
@@ -10,7 +12,6 @@ export async function getStaticProps () {
   }
   try {
     const res = await db.query(query)
-    console.log("!!!!!!!" + res.rowCount)
     const courseData = res.rows
     return {
       props: {
@@ -21,49 +22,22 @@ export async function getStaticProps () {
     console.log(err.stack)
   }
 }
-// const listItems = courses.map((course) =>
-//     <Link href={{pathname:course.endpoint}} key={course.num}><a><p>CSET {course.num}</p><p><span>{course.name}</span></p></a></Link>
-// )
 
 export default function Home({courseData}) {
 
-  const [showMe, setShowMe] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
   function toggle(){
-    setShowMe(!showMe);
+    setShowLogin(!showLogin);
   }
 
-  const [showMe2, setShowMe2] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
   function toggle2(){
-    setShowMe2(!showMe2);
+    setShowRegister(!showRegister);
   }
   //map the rows returned in the query of courses
   const conceptItems = courseData.map((c) =>
       <Link href="#" key={c.id}><a><p>{c.name_short}</p><p><span>{c.name_full}</span></p></a></Link>
   )
-
-  function registerForm(){
-    return(
-      <form>
-        <label htmlfor="first_name">First Name</label>
-        <input id="first_name" type="text" autoComplete="name" required />
-        <label htmlfor="last_name">Last Name</label>
-        <input id="last_name" type="text" autoComplete="name" required />
-        <label htmlfor="email">Email</label>
-        <input id="email" type="text" autoComplete="email" required />
-        <button type="submit">Register</button>
-      </form>
-    )
-  }
-
-  function loginForm(){
-    return(
-      <form>
-        <label htmfor="email">Email</label>
-        <input id="email" type="text" autoComplete="email" required />
-        <button type="submit">Login</button>
-      </form>
-    )
-  }
 
   return (
     <div className={styles.container}>
@@ -72,8 +46,8 @@ export default function Home({courseData}) {
       </Head>
       <nav>
 
-      <button onClick={toggle} type="button" name="show_links">Register</button>
-      <button onClick={toggle2} type="button" name="show_login">Log In</button>
+      <button onClick={toggle2} type="button" name="show_links">Register</button>
+      <button onClick={toggle} type="button" name="show_login">Log In</button>
 
       </nav>
       <main className={styles.main}>
@@ -85,24 +59,19 @@ export default function Home({courseData}) {
           The CSET Learning Tool Capstone Project by Steve, Kate and Kevin.
         </p>
         <section className={styles.homeForm} style={{
-          display: showMe?"block":"none"
+          display: showRegister?"block":"none"
         }}>
-        <h2>Register Form</h2>
-        {registerForm()}
+        <RegisterForm/>
         </section>
-        <section className={styles.homeForm} style={{
-          display: showMe2?"block":"none"
+        <section className={styles.homeForm}style={{
+          display: showLogin?"block":"none"
         }}>
-        <h2>Login Form</h2>
-        {loginForm()}
+        <LoginForm/>
         </section>
         <section className={styles.courseContainer}>
         {conceptItems}
         </section>
       </main>
-
-      <footer className={styles.footer}>
-      </footer>
     </div>
   )
 }
