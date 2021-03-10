@@ -2,7 +2,8 @@ const db = require('../db')
 
 export async function getStaticProps () {
   const query = {
-    text: 'SELECT * FROM users',
+    text: 'SELECT * FROM users WHERE first_name ILIKE $1',
+    values: ['si%']
   }
   try {
     const res = await db.query(query)
