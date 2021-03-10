@@ -1,7 +1,25 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import styles from '../../styles/course.module.css'
+const db = require('../db')
+import styles from '../styles/Courses.module.css'
 
+export async function getStaticProps () {
+  const query = {
+    text: 'SELECT * FROM courses',
+  }
+  try {
+    const res = await db.query(query)
+    console.log("!!!!!!!" + res.rowCount)
+    const courseData = res.rows
+    return {
+      props: {
+        courseData
+      }
+    }
+  } catch (err) {
+    console.log(err.stack)
+  }
+}
 // const listItems = courses.map((course) =>
 //   course.num === 105 ?
 //     <Link href={{pathname:course.endpoint2}} key={course.num}><a>CSET {course.num}</a></Link>
@@ -18,7 +36,12 @@ import styles from '../../styles/course.module.css'
 //     <p>{conData.data}</p><button type="button" name="">Take Concept Quiz</button></div>
 // )
 
-export default function cset_105(){
+export default function course({courseData}){
+
+  const conceptItems = courseData.map((c) =>
+      <Link href="#" key={c.id}><a>{c.name_short}</a></Link>
+  )
+
   return(
     <main>
     <Head>
@@ -27,7 +50,7 @@ export default function cset_105(){
     <h1 className={styles.pageTitle}>CSET 105: Intro to Web Applications</h1>
 
     <aside className={ styles.courseAside }>
-
+    {conceptItems}
     </aside>
     <div className={styles.conceptDiv}>
 
