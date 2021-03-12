@@ -5,8 +5,8 @@ import Router from 'next/router'
 
 export default function LoginForm(){
   const { mutateUser } = useUser({
-    redirectTo: '/',
-    redirectIfFound: false,
+    redirectTo: '/test',
+    redirectIfFound: true,
   })
 
   const [errorMsg, setErrorMsg] = useState('')

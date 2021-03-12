@@ -55,9 +55,11 @@ export default function Home({courseData}) {
         <title>CLT</title>
       </Head>
       <nav>
-
+      {user?.isLoggedIn === false ? <>
       <button onClick={toggle2} type="button" name="show_links">Register</button>
       <button onClick={toggle} type="button" name="show_login">Log In</button>
+      </>
+      :
       <a
         href="/api/logout"
         onClick={async (e) => {
@@ -68,6 +70,7 @@ export default function Home({courseData}) {
       >
         Logout
       </a>
+      }
       </nav>
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -77,17 +80,17 @@ export default function Home({courseData}) {
         <p className={styles.description}>
           The CSET Learning Tool Capstone Project by Steve, Kate and Kevin.
         </p>
-        <section className={styles.homeForm} style={{
-          display: showRegister?"block":"none"
-        }}>
-        <RegisterForm/>
-        </section>
-        <section className={styles.homeForm}style={{
-          display: showLogin?"block":"none"
-        }}>
-        <LoginForm/>
-        </section>
-        <p>{String(user.isLoggedIn)}</p>
+        {showRegister ?
+          <section className={styles.homeForm}>
+          <RegisterForm/>
+          </section>
+         : []
+        }
+        {showLogin ?
+          <section className={styles.homeForm}>
+            <LoginForm/>
+          </section>
+          : []}
         <section className={styles.courseContainer}>
         {conceptItems}
         </section>
