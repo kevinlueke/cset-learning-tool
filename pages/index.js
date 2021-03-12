@@ -40,10 +40,6 @@ export default function Home({courseData}) {
     setShowRegister(!showRegister);
   }
 
-  function logout() {
-
-  }
-
   //map the rows returned in the query of courses
   const conceptItems = courseData.map((c) =>
       <Link href="#" key={c.id}><a><p>{c.name_short}</p><p><span>{c.name_full}</span></p></a></Link>

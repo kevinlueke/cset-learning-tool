@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "next": "10.0.7",
     "next-iron-session": "^4.1.12",
     "pg": "^8.5.1",

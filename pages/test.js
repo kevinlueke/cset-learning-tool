@@ -1,5 +1,4 @@
 import useUser from '../lib/useUser'
-import withSession from '../lib/session'
 
 export default function Test() {
   const { user } = useUser( { redirectTo: '/' } )

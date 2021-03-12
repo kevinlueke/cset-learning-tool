@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import useUser from '../lib/useUser'
 import fetchJson from '../lib/fetchJson'
-import Router from 'next/router'
 
 export default function LoginForm(){
   const { mutateUser } = useUser({
@@ -27,7 +26,6 @@ export default function LoginForm(){
           body: JSON.stringify(body),
         })
       )
-      //Router.push('/test')
     } catch (error) {
       console.error('An unexpected error happened:', error)
       setErrorMsg(error.data.message)
