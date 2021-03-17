@@ -17,7 +17,6 @@ export default function RegisterForm() {
 
     await bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(pass, salt, function(err, hash) {
-          setErrorMsg(String(body))
           body.fname = fname
           body.lname = lname
           body.email = email
