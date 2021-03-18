@@ -8,12 +8,13 @@ export default class AnswerFormMC extends Component {
     ques_id:props.id,
     buttonDisplay:'block',
     isChecked:false,
-    result:false,
+    result:null,
     };
     this.onValueChange = this.onValueChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.answerCorrect = this.answerCorrect.bind(this);
+    this.answerInorrect = this.answerInorrect.bind(this);
   }
 
   formSubmit(event) {
@@ -25,20 +26,29 @@ export default class AnswerFormMC extends Component {
     }
     if(this.state.selectedOption===this.props.answer){
       this.answerCorrect()
-      console.log('TRUE')
+      console.log(this.props.ques_id,'TRUE')
+      //COOKIE LOGIC
     }else{
-      console.log('FALSE')
+      this.answerInorrect()
+      console.log(this.props.ques_id,'FALSE')
+      this.answerInorrect()
+      //COOKIE LOGIC
     }
   }
 
   answerCorrect(){
     this.setState({ result: true },
-    ()=>console.log('State updated', this.state.result))
+    ()=>console.log('State updated to:', this.state.result))
+  }
+
+  answerInorrect(){
+    this.setState({ result: false },
+    ()=>console.log('TF state updated to:', this.state.result))
   }
 
   hideButton(){
     this.setState({ buttonDisplay:'none',},
-    ()=>console.log('State updated', this.state.buttonDisplay))
+    ()=>console.log('buttonDisplay state updated to:', this.state.buttonDisplay))
   }
 
   handleChange(event) {
