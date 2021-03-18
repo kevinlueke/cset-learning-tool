@@ -1,8 +1,9 @@
 .main {
-  width: 80%;
+  width: 95%;
   margin: 3rem auto;
   display: flex;
   flex-direction: column;
+  max-width: 800px;
 }
 
 .main h1 {
@@ -29,10 +30,11 @@
   margin: auto;
   max-width: 900px;
   background-color: #eefbfb;
+  height: 700px;
 }
 
 .carousel section {
-  min-width: 85%;
+  min-width: 7rem;
   display: flex;
   flex-direction: column;
   user-select: none;
@@ -83,7 +85,15 @@
 }
 
 .carousel section form input {
+  min-height: .65rem; min-width: .65rem;
+  height: 1.5vw;width: 1.5vw;
   margin:1rem 1rem .5rem 0;
+}
+
+.carousel section form label {
+  color: rgba(0, 72, 99, 1);
+  font-size: 2.5vw;
+  font-variant: small-caps;
 }
 
 .carousel section form button {
@@ -112,4 +122,18 @@
 
 button.rec-dot:hover, button.rec-dot:active, button.rec-dot:focus  {
   box-shadow: 0 0 1px 3px rgba(0,0,0,1);
+}
+
+@media only screen and (min-width:1100px){
+  .carousel section ul li{
+    font-size: 2rem;
+  }
+
+  .carousel section form input {
+    height:1rem;width:1rem;
+  }
+
+  .carousel section form label {
+    font-size: 2vw;
+  }
 }
