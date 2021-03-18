@@ -45,10 +45,12 @@ class Slide extends Component {
     return (
       <Carousel className={styles.carousel} >
       <section>
+        <h2>{this.props.title}</h2>
         <h1>Begin Quiz!</h1>
       </section>
         {questions}
       <section>
+        <h2>{this.props.title}</h2>
         <h1>Finish</h1>
         <p>{this.state.answers_correct}</p>
         <p>{this.state.answers_incorrect}</p>
@@ -68,10 +70,11 @@ const query = {
 try {
   const res = await db.query(query)
   const quiz_questions = res.rows
+  const title = res.rows[0].title
   const total = res.rowCount
   return {
     props: {
-      quiz_questions, total
+      quiz_questions, total, title
     }
   }
 } catch (err) {
