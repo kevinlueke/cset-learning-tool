@@ -5,41 +5,40 @@ export default class AnswerFormMC extends Component {
   super(props);
 
   this.state = {
-      ques_id:props.id,
-      answer:'',
-      res_a:'',
-      res_b:'',
-      res_c:'',
-      res_d:'',
-      buttonDisplay:'block',
-      checkDisplay:'hidden',
-      xDisplay:'hidden',
-      isChecked:false
+    ques_id:props.id,
+    buttonDisplay:'block',
+    isChecked:false,
+    result:false,
     };
-  this.onValueChange = this.onValueChange.bind(this);
-  this.formSubmit = this.formSubmit.bind(this);
-  this.handleChange = this.handleChange.bind(this);
+    this.onValueChange = this.onValueChange.bind(this);
+    this.formSubmit = this.formSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.answerCorrect = this.answerCorrect.bind(this);
   }
 
   formSubmit(event) {
     event.preventDefault();
+    this.hideButton()
     if(this.state.isChecked===true){
       console.log("save ques: ",this.props.ques_id,)
       // stuff to save the question here
     }
     if(this.state.selectedOption===this.props.answer){
+      this.answerCorrect()
       console.log('TRUE')
-      this.setState({
-        buttonDisplay:'none',
-        checkDisplay:'visible'
-      })
     }else{
       console.log('FALSE')
-      this.setState({
-        buttonDisplay:'none',
-        xDisplay:'visible'
-      })
     }
+  }
+
+  answerCorrect(){
+    this.setState({ result: true },
+    ()=>console.log('State updated', this.state.result))
+  }
+
+  hideButton(){
+    this.setState({ buttonDisplay:'none',},
+    ()=>console.log('State updated', this.state.buttonDisplay))
   }
 
   handleChange(event) {
@@ -111,8 +110,6 @@ export default class AnswerFormMC extends Component {
       </li>
       </ul>
       <div>
-      <span style={{visibility:this.state.checkDisplay}}>&#10003;</span>
-      <span style={{visibility:this.state.xDisplay}}>X</span>
       </div>
       <button style={{display:this.state.buttonDisplay}}type="submit" name="submit" value="submit">Answer</button>
       </form>
