@@ -18,7 +18,6 @@ export default class Ques extends Component{
     super(props);
 
     this.state={
-      result:false,
     }
 
   }
@@ -30,7 +29,9 @@ export default class Ques extends Component{
       <section key ={this.props.id}>
         <h1>{this.props.title}</h1>
         <h2>{this.props.q_question}</h2>
-        <AnswerFormTF ques_id={this.props.q_id} res_a={this.props.res_a} res_b={this.props.res_b} answer={this.props.ans}/>
+        <AnswerFormTF ques_id={this.props.q_id} res_a={this.props.res_a} res_b={this.props.res_b}
+        answer={this.props.ans}
+        onChangeValue={this.handleChangeValue}/>
         {clue}
       </section>)
 
