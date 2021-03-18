@@ -1,4 +1,5 @@
 import {useState,Component} from 'react';
+// const db = require('../db')
 
 export default class AnswerFormTF extends Component {
   constructor(props) {
@@ -6,16 +7,15 @@ export default class AnswerFormTF extends Component {
 
   this.state = {
       ques_id:props.id,
-      answer:'',
-      res_a:'',
-      res_b:'',
       buttonDisplay:'block',
-      checkDisplay:'hidden',
-      xDisplay:'hidden'
+      isChecked:false,
+      result:false,
     };
+
     this.onValueChange = this.onValueChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.answerCorrect = this.answerCorrect.bind(this);
     }
 
     onValueChange(event) {
@@ -24,26 +24,41 @@ export default class AnswerFormTF extends Component {
       });
     }
 
+    answerCorrect(){
+      this.setState({ result: true },
+      ()=>console.log('State updated', this.state.result))
+    }
+
+    hideButton(){
+      this.setState({ buttonDisplay:'none',},
+      ()=>console.log('State updated', this.state.buttonDisplay))
+    }
+
     formSubmit(event) {
       event.preventDefault();
+      this.hideButton()
       if(this.state.isChecked===true){
-        console.log("save ques: ",this.props.ques_id,)
-        // stuff to save the question here
+        console.log("save ques: ",this.props.ques_id)
+        // const ques_query = {
+        //   text:'INSERT INTO student_questions(student_id, question_id) VALUES ($1, $2)',
+        //   values:[user_id,this.props.ques_id],
+        // }
+        // try {
+        //   const res = await db.query(ques_query)
+        // } catch (err) {
+        //   console.log(err.stack)
+        // }
       }
       if(this.state.selectedOption===this.props.answer){
-        console.log('TRUE')
-        this.setState({
-          buttonDisplay:'none',
-          checkDisplay:'visible'
-        })
+        this.answerCorrect()
+        console.log(this.props.ques_id,'TRUE')
       }else{
-        console.log('FALSE')
-        this.setState({
-          buttonDisplay:'none',
-          xDisplay:'visible'
-        })
-        }
+        console.log(this.props.ques_id,'FALSE')
+        return (this.props.ques_id,'FALSE')
       }
+
+    }
+
     handleChange(event) {
           this.setState(({ isChecked }) => (
             {
@@ -88,10 +103,8 @@ export default class AnswerFormTF extends Component {
         </li>
       </ul>
       <div>
-      <span style={{visibility:this.state.checkDisplay}}>&#10003;</span>
-      <span style={{visibility:this.state.xDisplay}}>X</span>
       </div>
-      <button style={{display:this.state.buttonDisplay}} type="submit" name="submit" value="submit">Answer</button>
+      <button style={{ display: this.state.buttonDisplay}} type="submit" name="submit" value="submit">Answer</button>
       </form>
     )};
   }
