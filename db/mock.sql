@@ -12,11 +12,11 @@ VALUES ('2023 A'),
        ('2024 B');
 
 INSERT INTO users (email, password, first_name, last_name, class, role, confirmed)
-VALUES ('admin@email.com', '123', 'aaron', 'admin', NULL, 1, TRUE),
-       ('teacher@email.com', '123', 'theresa', 'teacher', NULL, 2, TRUE),
-       ('student1@email.com', '123', 'siobhan', 'student', 1, 3, TRUE),
-       ('student2@email.com', '123', 'silas', 'student', 2, 3, TRUE),
-       ('student3@email.com', '123', 'sam', 'student', 3, 3, FALSE);
+VALUES ('admin@email.com', '$2a$10$xyd3nctZXeyvMHuvyX12S.9Epb0elX1xCKbUEHNVJ2UW6WgIWcRe6t', 'aaron', 'admin', NULL, 1, TRUE),
+       ('teacher@email.com', '$2a$10$96m0FZgpexDOt/m29BndcObQ/igLPBnk4tmuwd1Gh9koufPnEYWaG', 'theresa', 'teacher', NULL, 2, TRUE),
+       ('student1@email.com', '$2a$10$GfFUkkG1coAFtfeu6e8KZ.NokNtx5pXEckx2LPKK8CfNGMvKnvaYC', 'siobhan', 'student', 1, 3, TRUE),
+       ('student2@email.com', '$2a$10$Rq3fh6F042DrgPwDcWjN4OJd5.T8cHisM83RJQisHk9lmMbtZ9gI2', 'silas', 'student', 2, 3, TRUE),
+       ('student3@email.com', '$2a$10$JH.ZTwR/vhYevxVAbr4U3O06PpYA1tnPI/pDd6jA68J3Wk2qWNhzi', 'sam', 'student', 3, 3, FALSE);
 
 INSERT INTO courses (name_short, name_full)
 VALUES ('CSET 105', 'Intro to Web Applications'),

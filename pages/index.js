@@ -3,8 +3,11 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 const db = require('../db')
 import React, { useState } from "react";
+import { useRouter } from 'next/router'
 import RegisterForm from '../components/register'
 import LoginForm from '../components/login'
+import fetchJson from '../lib/fetchJson'
+import useUser from '../lib/useUser'
 
 export async function getStaticProps () {
   const query = {
@@ -24,6 +27,8 @@ export async function getStaticProps () {
 }
 
 export default function Home({courseData}) {
+  const { user, mutateUser } = useUser()
+  const router = useRouter()
 
   const [showLogin, setShowLogin] = useState(false);
   function toggle(){
@@ -34,6 +39,7 @@ export default function Home({courseData}) {
   function toggle2(){
     setShowRegister(!showRegister);
   }
+
   //map the rows returned in the query of courses
   const conceptItems = courseData.map((c) =>
       <Link href="#" key={c.id}><a><p>{c.name_short}</p><p><span>{c.name_full}</span></p></a></Link>
@@ -45,10 +51,22 @@ export default function Home({courseData}) {
         <title>CLT</title>
       </Head>
       <nav>
-
+      {user?.isLoggedIn === false ? <>
       <button onClick={toggle2} type="button" name="show_links">Register</button>
       <button onClick={toggle} type="button" name="show_login">Log In</button>
-
+      </>
+      :
+      <a
+        href="/api/logout"
+        onClick={async (e) => {
+          e.preventDefault()
+          await mutateUser(fetchJson('/api/logout'))
+          router.push('/')
+        }}
+      >
+        Logout
+      </a>
+      }
       </nav>
       <main className={styles.main}>
         <h1 className={styles.title}>
@@ -58,16 +76,17 @@ export default function Home({courseData}) {
         <p className={styles.description}>
           The CSET Learning Tool Capstone Project by Steve, Kate and Kevin.
         </p>
-        <section className={styles.homeForm} style={{
-          display: showRegister?"block":"none"
-        }}>
-        <RegisterForm/>
-        </section>
-        <section className={styles.homeForm}style={{
-          display: showLogin?"block":"none"
-        }}>
-        <LoginForm/>
-        </section>
+        {showRegister ?
+          <section className={styles.homeForm}>
+          <RegisterForm/>
+          </section>
+         : []
+        }
+        {showLogin ?
+          <section className={styles.homeForm}>
+            <LoginForm/>
+          </section>
+          : []}
         <section className={styles.courseContainer}>
         {conceptItems}
         </section>

@@ -1,27 +1,13 @@
-const db = require('../db')
+import useUser from '../lib/useUser'
 
-export async function getStaticProps () {
-  const query = {
-    text: 'SELECT * FROM users',
-  }
-  try {
-    const res = await db.query(query)
-    const userData = res.rows[0]
-    const otherUser = res.rows[1]
-    return {
-      props: {
-        userData,
-        otherUser
-      }
-    }
-  } catch (err) {
-    console.log(err.stack)
+export default function Test() {
+  const { user } = useUser( { redirectTo: '/' } )
+
+  if (!user || user.isLoggedIn === false) {
+    return <p>Loading...</p>
   }
 
-}
-
-export default function Test({ userData, otherUser }) {
   return (
-    <p>{userData.email} + {otherUser.email}</p>
+    <p>Hello {user.name}</p>
   )
 }
