@@ -12,7 +12,7 @@ VALUES ('2023 A'),
        ('2024 B');
 
 INSERT INTO users (email, password, first_name, last_name, class, role, confirmed)
-VALUES ('admin@email.com', '$2a$10$xyd3nctZXeyvMHuvyX12S.9Epb0elX1xCKbUEHNVJ2UW6WgIWcRe6t', 'aaron', 'admin', NULL, 1, TRUE),
+VALUES ('admin@email.com', '$2a$10$p/hp8mtwqln9uheDMaclKe831v9Vcn4z28ic2KD9aDk0ufNKDlxBi', 'aaron', 'admin', NULL, 1, TRUE),
        ('teacher@email.com', '$2a$10$96m0FZgpexDOt/m29BndcObQ/igLPBnk4tmuwd1Gh9koufPnEYWaG', 'theresa', 'teacher', NULL, 2, TRUE),
        ('student1@email.com', '$2a$10$GfFUkkG1coAFtfeu6e8KZ.NokNtx5pXEckx2LPKK8CfNGMvKnvaYC', 'siobhan', 'student', 1, 3, TRUE),
        ('student2@email.com', '$2a$10$Rq3fh6F042DrgPwDcWjN4OJd5.T8cHisM83RJQisHk9lmMbtZ9gI2', 'silas', 'student', 2, 3, TRUE),
