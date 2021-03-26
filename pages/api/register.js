@@ -11,9 +11,14 @@ export default withSession(async (req, res) => {
 
   try {
     const db_res = await db.query(query)
-    res.status(200).json(db_res.data)
+    res.status(200).json({
+      type: 'success',
+      message: 'Account created successfully'
+    })
   } catch (error) {
-    console.log(error)
-    res.status(500).json(error.stack)
+    res.status(400).json({
+      type: 'error',
+      message: 'Email in use.'
+    })
   }
 })

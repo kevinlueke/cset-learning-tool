@@ -17,16 +17,23 @@ export default function RegisterForm() {
 
     await bcrypt.genSalt(10, function(err, salt) {
       bcrypt.hash(pass, salt, function(err, hash) {
-          body.fname = fname
-          body.lname = lname
-          body.email = email
-          body.password = hash
+        body.fname = fname
+        body.lname = lname
+        body.email = email
+        body.password = hash
 
-          fetchJson('/api/register', {
-            method: 'POST',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(body),
-          })
+        fetch('/api/register', {
+          method: 'POST',
+          headers: { 'Content-type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        .then(response => response.json())
+        .then(data => setErrorMsg(data.message))
+        .catch((error) => {
+          setErrorMsg(error.message)
+        })
+
+
       })
     })
   }

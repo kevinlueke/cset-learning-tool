@@ -12,17 +12,20 @@ export default withSession(async (req, res) => {
   try {
     const db_res = await db.query(query)
     const data = db_res.rows[0]
-    if (bcrypt.compareSync(password, data.password)) {
+    if (data && bcrypt.compareSync(password, data.password)) {
       const user = { isLoggedIn: true, id: data.id, name: data.first_name, }
       req.session.set('user', user)
       await req.session.save()
-      res.json(user)
+      res.status(200).json(user)
     } else {
-      res.end()
+      res.status(404).json({
+        type: 'error',
+        message: 'Invalid username or password'
+      })
     }
   } catch (error) {
-    console.log(error.stack)
-    res.status(404).json(error)
+    console.error(error.stack)
+    res.status(500).json(error)
   }
 
 })
