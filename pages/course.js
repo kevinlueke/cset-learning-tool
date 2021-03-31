@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Link from 'next/link'
+import CourseList from '../components/course-list.js'
 const db = require('../db')
 import styles from '../styles/Courses.module.css'
 
@@ -20,26 +20,11 @@ export async function getStaticProps () {
     console.log(err.stack)
   }
 }
-// const listItems = courses.map((course) =>
-//   course.num === 105 ?
-//     <Link href={{pathname:course.endpoint2}} key={course.num}><a>CSET {course.num}</a></Link>
-//   :
-//     <Link className={styles.special} href={{pathname:course.endpoint2}} key={course.num}><a>CSET {course.num}</a></Link>
-// )
-
-// const conceptItems = concepts.map((concept) =>
-//     <a href={concept.pg_id} key={concept.num}>{concept.name}</a>
-// )
-//
-// const sectionData = conceptD.map((conData)=>
-//     <div><h2 id={conData.id} key={conData.id}>{conData.title}</h2>
-//     <p>{conData.data}</p><button type="button" name="">Take Concept Quiz</button></div>
-// )
 
 export default function course({courseData}){
 
   const conceptItems = courseData.map((c) =>
-      <Link href="#" key={c.id}><a>{c.name_short}</a></Link>
+      <Link href={`/courses/${c.name_short.replaceAll(' ', '_')}`} key={c.id}><a>{c.name_short}</a></Link>
   )
 
   return(
