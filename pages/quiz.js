@@ -1,85 +1,96 @@
 import styles from '../styles/Quiz.module.css'
-import React, { Component } from 'react';
+import {Component} from 'react';
+import { useState } from 'react';
+import {useRouter} from 'next/router'
+import Link from 'next/link'
 import Carousel from 'react-elastic-carousel';
-import Ques from '../components/Questions'
+import AnswerFormMC from '../components/AnswerFormMC'
+import AnswerFormTF from '../components/AnswerFormTF'
+import QuizResults from '../components/QuizResults'
+import useUser from '../lib/useUser'
+import useCookie from '../lib/useCookie'
 const db = require('../db')
 
+export async function getStaticProps () {
 
-class Slide extends Component {
+  // const router = useRouter()
+  // const {qid} = router.query
+  const query = {
+    text: "SELECT q.question,q.clue,q.ans,q.res_a,q.res_b,q.res_c,q.res_d,q.id,con.title FROM questions q JOIN concepts con ON q.concept_id = con.id WHERE q.concept_id = $1 ORDER BY random() LIMIT $2",
+    values:[1,5],
+  }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      answers_correct: [],
-      answers_incorrect:[],
+  try {
+    const res = await db.query(query)
+    const quiz_questions = res.rows
+    const title = res.rows[0].title
+    return {
+      props: {
+        quiz_questions, title
+      }
     }
-  };
+  } catch (err) {
+    console.log(err.stack)
+  }
+}
 
-  saveInput = (e) => {
-    this.setState({ input: e.target.value });
-    };
-  //
-  addNewItemCorrect = () => {
-    let { answers_correct, input } = this.state;
-    answers_correct.push(input);
-    console.log(this.state.answers_correct)
-  };
-  addNewItemIncorrect = () => {
-    let { answers_incorrect, input } = this.state;
-    answers_incorrect.push(input);
-    console.log(this.state.answers_incorrect)
-  };
-  addNewItemSaved = () => {
-    let { answers_saved, input } = this.state;
-    answers_saved.push(input);
-    console.log(this.state.answers_saved)
-  };
+export default function QuizCarousel({quiz_questions, title}) {
 
-  render() {
-    let array = this.props.quiz_questions
-    const questions = array.map((question, index) =>{
-      return <Ques q_id={question.id} q_question={question.question} key={index}
-      title={question.title} res_a={question.res_a} res_b={question.res_b}
-      res_c={question.res_c} res_d={question.res_d} ans={question.ans} clue={question.clue}/>
-    })
-    return (
+  const { user } = useUser( { redirectTo: '/' } )
+  const { cookie } = useCookie({})
+
+  if (!user || user.isLoggedIn === false || !cookie) {
+    return <p>Loading...</p>
+  }
+
+  function renderClue(clue){
+    if(clue!=null){
+    return(
+      <aside>
+        <h3>Need a hint? Hover!</h3>
+        <p>{clue}</p>
+      </aside>
+    )}
+  }
+
+  let this_quiz = []
+
+  const questions = quiz_questions.map((question, index) => {
+    //if there is a clue, rendr it
+    this_quiz.push(question.id)
+    let clue = renderClue(question.clue)
+
+    //if t/f question
+    if (question.res_c == null){
+
+      return (<section key={index}><AnswerFormTF id={question.id} question={question.question}
+        res_a={question.res_a} res_b={question.res_b} ans={question.ans} user={user.id}/>
+        {clue}
+        </section>)
+    } else {
+
+      //if multiple choice question
+      return (<section key={index}><AnswerFormMC id={question.id} question={question.question}
+        res_a={question.res_a} res_b={question.res_b} res_c={question.res_c}
+        res_d={question.res_d} ans={question.ans} clue={question.clue} user={user.id}/>
+        {clue}
+        </section>)
+    }
+  })
+
+  return(
+
       <Carousel className={styles.carousel} >
       <section>
-        <h2>{this.props.title}</h2>
-        <h1>Begin Quiz!</h1>
+        <h2>{title}</h2>
+        <h1>Begin Quiz, {user.name}!</h1>
       </section>
         {questions}
-      <section>
-        <h2>{this.props.title}</h2>
+      <section className={styles.finalCard}>
+        <h2>{title}</h2>
         <h1>Finish</h1>
-        <p>{this.state.answers_correct}</p>
-        <p>{this.state.answers_incorrect}</p>
-        <p>{this.props.total}</p>
+        <QuizResults question_ids={this_quiz} user={user.id}/>
       </section>
       </Carousel>
     )
 };
-}
-
-export async function getStaticProps () {
-const query = {
-  text: "SELECT q.question,q.clue,q.ans,q.res_a,q.res_b,q.res_c,q.res_d,q.id,con.title FROM questions q JOIN concepts con ON q.concept_id = con.id WHERE q.concept_id = $1",
-  values:[1],
-}
-
-try {
-  const res = await db.query(query)
-  const quiz_questions = res.rows
-  const title = res.rows[0].title
-  const total = res.rowCount
-  return {
-    props: {
-      quiz_questions, total, title
-    }
-  }
-} catch (err) {
-  console.log(err.stack)
-}
-}
-
-export default Slide

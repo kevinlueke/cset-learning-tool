@@ -1,4 +1,6 @@
 import {useState,Component} from 'react';
+import useCookie from '../lib/useCookie'
+import fetchJson from '../lib/fetchJson'
 
 export default class AnswerFormMC extends Component {
   constructor(props) {
@@ -13,42 +15,48 @@ export default class AnswerFormMC extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.answerCorrect = this.answerCorrect.bind(this);
-    this.answerInorrect = this.answerInorrect.bind(this);
+  }
+
+  storeResults(x, y){
+    const student_id = this.props.user
+    const question_id = this.props.id
+    const result = y
+    let save = x
+    const body = {}
+
+    body.student_id=student_id
+    body.question_id = question_id
+    body.question_result = result
+    body.save = save
+
+    fetch('api/savequestion', {
+      method:'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(body),
+    })
   }
 
   formSubmit(event) {
     event.preventDefault();
     this.hideButton()
-    if(this.state.isChecked===true){
-      console.log("save ques: ",this.props.ques_id,)
-      // stuff to save the question here
-    }
-    if(this.state.selectedOption===this.props.answer){
-      this.answerCorrect()
-      console.log(this.props.ques_id,'TRUE')
-      //COOKIE LOGIC
+    if(this.state.selectedOption===this.props.ans){
+      if(this.state.isChecked===true){
+        this.storeResults(true, true)
+      } else {
+        this.storeResults(false, true)
+      }
     }else{
-      this.answerInorrect()
-      console.log(this.props.ques_id,'FALSE')
-      this.answerInorrect()
-      //COOKIE LOGIC
+      if(this.state.isChecked===true){
+        this.storeResults(true,false)
+      } else {
+        this.storeResults(false,false)
+      }
     }
-  }
-
-  answerCorrect(){
-    this.setState({ result: true },
-    ()=>console.log('State updated to:', this.state.result))
-  }
-
-  answerInorrect(){
-    this.setState({ result: false },
-    ()=>console.log('TF state updated to:', this.state.result))
   }
 
   hideButton(){
     this.setState({ buttonDisplay:'none',},
-    ()=>console.log('buttonDisplay state updated to:', this.state.buttonDisplay))
+    ()=>console.log('buttonDisplay:', this.state.buttonDisplay))
   }
 
   handleChange(event) {
@@ -69,10 +77,10 @@ export default class AnswerFormMC extends Component {
   }
 
   render(){
-
     return (
       <form onSubmit={this.formSubmit}>
       <ul>
+      <li><h3>{this.props.question}</h3></li>
       <li>
         <input
         type="radio"
@@ -119,8 +127,6 @@ export default class AnswerFormMC extends Component {
         <label htmlFor="save">save question</label>
       </li>
       </ul>
-      <div>
-      </div>
       <button style={{display:this.state.buttonDisplay}}type="submit" name="submit" value="submit">Answer</button>
       </form>
     )};

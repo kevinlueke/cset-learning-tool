@@ -40,7 +40,13 @@ VALUES (1, 'Programming Concepts', 'Information about bits, numbers, encoding, e
        (1, 'Values, Types, and Operators', 'Information about values, types, operators, etc.');
 
 INSERT INTO questions (concept_id, question, clue, ans, res_a, res_b, res_c, res_d)
-VALUES (1, 'What is your quest?', NULL, 'To find the Holy Grail', 'To find the Holy Grail', 'To find the cure for smelling of elderberries', NULL, NULL);
+VALUES (1, 'What is your quest?', NULL, 'To find the Holy Grail', 'To find the Holy Grail', 'To find the cure for smelling of elderberries', NULL, NULL),
+        (1, 'Who is the greatest of them all?', 'Not the duck', 'Mickey', 'Goofy','Donald','Mickey','Daisey'),
+        (1, 'Roses are red, violets are ...', 'rymes with poo', 'blue','red','pink','green','blue'),
+        (1, 'What is the difference between a seal and a sea lion?', NULL,'an ion', 'nothing', 'an ion', 'one has legs', 'sea lions do not eat cheese'),
+        (1, 'Is that parrot dead?', NULL, 'yes', 'no', 'yes', NULL, NULL),
+        (1, 'Who was the best doctor?', 'precious bodily fluids','Strangelove', 'McCoy', 'Who', 'Strangelove', 'House'),
+        (1, 'In Australia, your left is actally your right', 'really, you need a hint?', 'no', 'yes','no', NULL,NULL);
 
-INSERT INTO student_questions (student_id, question_id)
-VALUES (3, 1);
+INSERT INTO student_questions (student_id, question_id, question_result, save)
+VALUES (3, 1, TRUE,TRUE);

@@ -1,4 +1,6 @@
 import {useState,Component} from 'react';
+import fetchJson from '../lib/fetchJson'
+
 // const db = require('../db')
 
 export default class AnswerFormTF extends Component {
@@ -15,9 +17,9 @@ export default class AnswerFormTF extends Component {
     this.onValueChange = this.onValueChange.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.answerCorrect = this.answerCorrect.bind(this);
-    this.answerInorrect = this.answerInorrect.bind(this);
     }
+
+
 
     onValueChange(event) {
       this.setState({
@@ -25,48 +27,49 @@ export default class AnswerFormTF extends Component {
       });
     }
 
-    answerCorrect(){
-      this.setState({ result: true },
-      ()=>console.log('TF state updated to:', this.state.result))
-    }
-
-    answerInorrect(){
-      this.setState({ result: false },
-      ()=>console.log('TF state updated to:', this.state.result))
-    }
-
     hideButton(){
       this.setState({ buttonDisplay:'none',},
       ()=>console.log('buttonDisplay state updated to:', this.state.buttonDisplay))
     }
 
+    storeResults(x, y){
+
+      const student_id = this.props.user
+      const question_id = this.props.id
+      const result = y
+      let save = x
+      const body = {}
+
+      body.student_id= student_id
+      body.question_id = question_id
+      body.question_result = result
+      body.save = save
+
+      console.log(body)
+
+      fetch('api/savequestion', {
+        method:'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(body),
+      })
+    }
+
     formSubmit(event) {
       event.preventDefault();
       this.hideButton()
-      if(this.state.isChecked===true){
-        console.log("save ques: ",this.props.ques_id)
-        //DATABASE LOGIC HERE
-        // const ques_query = {
-        //   text:'INSERT INTO student_questions(student_id, question_id) VALUES ($1, $2)',
-        //   values:[user_id,this.props.ques_id],
-        // }
-        // try {
-        //   const res = await db.query(ques_query)
-        // } catch (err) {
-        //   console.log(err.stack)
-        // }
-      }
-      if(this.state.selectedOption===this.props.answer){
-        this.answerCorrect()
-        console.log(this.props.ques_id,'TRUE')
-        //COOKIE LOGIC
+      if(this.state.selectedOption===this.props.ans){
+        if(this.state.isChecked===true){
+          this.storeResults(true, true)
+        } else {
+          this.storeResults(false, true)
+        }
       }else{
-        this.answerInorrect()
-        console.log(this.props.ques_id,'FALSE')
-        this.answerInorrect()
-        //COOKIE LOGIC
+        if(this.state.isChecked===true){
+          this.storeResults(true,false)
+        } else {
+          this.storeResults(false,false)
+        }
       }
-
     }
 
     handleChange(event) {
@@ -84,6 +87,7 @@ export default class AnswerFormTF extends Component {
     return (
       <form onSubmit={this.formSubmit}>
       <ul>
+      <li><h3>{this.props.question}</h3></li>
       <li>
         <input
         type="radio"
@@ -112,9 +116,7 @@ export default class AnswerFormTF extends Component {
         <label htmlFor="save">save question</label>
         </li>
       </ul>
-      <div>
-      </div>
-      <button style={{ display: this.state.buttonDisplay}} type="submit" name="submit" value="submit">Answer</button>
+      <button style={{ display: this.state.buttonDisplay }} type="submit" name="submit" value="submit">Answer</button>
       </form>
     )};
   }

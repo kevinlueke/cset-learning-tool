@@ -66,7 +66,10 @@ CREATE TABLE questions (
 -- Student - Questions junction for creating quizzes
 CREATE TABLE student_questions (
   student_id bigint REFERENCES users(id),
-  question_id bigint REFERENCES questions(id)
+  question_id bigint REFERENCES questions(id),
+  question_result boolean,
+  save boolean,
+  CONSTRAINT UNIQUE_PAIRS UNIQUE (student_id, question_id)
 );
 
 -- Class - course junction for allowing members of a class to view a course

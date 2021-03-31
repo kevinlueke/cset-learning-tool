@@ -40,10 +40,9 @@
   user-select: none;
 }
 
-.carousel h2 {
+.carousel h2, .carousel lh {
   font-size: 5vw;
   margin-top: 3rem;
-  padding-bottom: 1rem;
   border-bottom: 2px solid black;
 }
 
@@ -67,36 +66,36 @@
   opacity: 1;
 }
 
-.carousel section form {
+.carousel form {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-.carousel section ul {
+.carousel form ul {
   margin-block-start: 0;
   margin-block-end: 0;
   margin: 0;padding: 0;
 }
 
-.carousel section ul li{
+.carousel form ul li{
   font-size: 3vw;
   margin: .5rem 0;
 }
 
-.carousel section form input {
+.carousel form input {
   min-height: .65rem; min-width: .65rem;
   height: 1.5vw;width: 1.5vw;
   margin:1rem 1rem .5rem 0;
 }
 
-.carousel section form label {
+.carousel form label {
   color: rgba(0, 72, 99, 1);
   font-size: 2.5vw;
   font-variant: small-caps;
 }
 
-.carousel section form button {
+.carousel form button {
   background-color: darkgrey;
   padding: .25rem;
   width: 6.5rem;
@@ -118,6 +117,20 @@
   text-align: center;
   margin-top: 2rem;
   font-size: 3rem;
+}
+
+.finalCard {
+
+}
+
+.finalCard div {
+  display: flex;
+  flex-direction: column;
+}
+
+.finalCard div p {
+  text-align: left;
+  margin: .25rem;
 }
 
 button.rec-dot:hover, button.rec-dot:active, button.rec-dot:focus  {
