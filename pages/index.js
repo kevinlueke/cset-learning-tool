@@ -42,7 +42,7 @@ export default function Home({courseData}) {
 
   //map the rows returned in the query of courses
   const conceptItems = courseData.map((c) =>
-      <Link href="#" key={c.id}><a><p>{c.name_short}</p><p><span>{c.name_full}</span></p></a></Link>
+    <Link href={`/courses/${c.name_short.replaceAll(' ', '_')}`} key={c.id}><a><p>{c.name_short}</p><p><span>{c.name_full}</span></p></a></Link>
   )
 
   return (
