@@ -1,7 +1,7 @@
 .pageTitle {
   color: #eefbfb;
   margin-left:35vw;
-  margin-bottom: 10rem;
+  margin-bottom: 4rem;
 }
 
 .courseAside, .courseAside2 {
@@ -58,10 +58,15 @@
   color: #4da8da;
 }
 
+.editArea {
+  width: 64vw;
+}
+
 .courseContent{
   display: flex;
+  width: 70%;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin-left: 34vw;
   margin-right: 1.5rem;
@@ -74,12 +79,13 @@
 }
 .courseContent p {
   padding: 40px 20px;
+  width: 64vw;
   background-color:#eefbfb;
-  margin: 5rem 0 5rem 0;
+  margin: 2rem 0 2rem 0;
 }
 
 .courseContent button {
-  margin: 1rem 0 5rem 0;
+  margin: 1rem 0 5rem 0.5vw;
   padding: 10px 20px;
 }
 
