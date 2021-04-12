@@ -71,13 +71,14 @@
   margin-left: 34vw;
   margin-right: 1.5rem;
 }
-.courseContent h2 {
+.courseContent > article > h2 {
   color:#eefbfb;
   padding-bottom: 1rem;
   border-bottom: 1px solid white;
   text-align: left;
 }
-.courseContent p {
+
+.conceptBody {
   padding: 40px 20px;
   width: 64vw;
   background-color:#eefbfb;

@@ -5,6 +5,8 @@ const db = require('../../db')
 import styles from '../../styles/Courses.module.css'
 import { useState } from 'react'
 import useUser from '../../lib/useUser'
+import remark from 'remark'
+import html from 'remark-html'
 
 export async function getStaticPaths () {
   const query = {
@@ -46,6 +48,11 @@ export async function getStaticProps ({ params }) {
 
     const res_concepts = await db.query(query_concepts)
     const conceptList = res_concepts.rows
+    for (let concept of conceptList) {
+      const processedContent = await remark().use(html).process(concept.body)
+      concept.processedBody = processedContent.toString()
+    }
+
     const res_courses = await db.query(query_courses)
     const courseList = res_courses.rows
     return {
@@ -107,7 +114,7 @@ export default function Course ({ courseData, courseList, conceptList }) {
         </form>
         :
         <section>
-          <p>{c.body}</p>
+          <div className={styles.conceptBody} dangerouslySetInnerHTML={{ __html: c.processedBody}} />
           {[1, 2].includes(user.access) &&
             <button value={c.id} onClick={handleEdit}>Edit</button>
           }
