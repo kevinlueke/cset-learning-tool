@@ -4,10 +4,7 @@ import fetchJson from '../lib/fetchJson'
 import styles from '../styles/Home.module.css'
 
 export default function LoginForm({ onToggle }){
-  const { mutateUser } = useUser({
-    redirectTo: '/test',
-    redirectIfFound: true,
-  })
+  const { mutateUser } = useUser({})
 
   const handleToggle = (e) => {
     onToggle(false)
@@ -31,6 +28,7 @@ export default function LoginForm({ onToggle }){
           body: JSON.stringify(body),
         })
       )
+      onToggle(false)
     } catch (error) {
       console.error('An unexpected error happened:', error)
       setErrorMsg(error.data.message)

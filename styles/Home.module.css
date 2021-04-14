@@ -62,6 +62,31 @@
   align-items: center;
 }
 
+.homeButton {
+  display: inline-block;
+  width: 7rem;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #203647;
+  color: #eefbfb;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 150ms ease;
+}
+
+.homeButton:hover {
+  background-color: #4da8da;
+  color: #203647;
+  box-shadow: 0 0 5px 3px #eefbfb;
+}
+
+.homeButton:active {
+  transform: scale(0.99);
+}
+
 .title {
   margin: 0;
   line-height: 1.15;

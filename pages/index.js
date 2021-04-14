@@ -51,22 +51,23 @@ export default function Home({courseData}) {
         <title>CLT</title>
       </Head>
       <nav>
-      {user?.isLoggedIn === false ? <>
-      <button onClick={toggle2} type="button" name="show_links">Register</button>
-      <button onClick={toggle} type="button" name="show_login">Log In</button>
-      </>
-      :
-      <a
-        href="/api/logout"
-        onClick={async (e) => {
-          e.preventDefault()
-          await mutateUser(fetchJson('/api/logout'))
-          router.push('/')
-        }}
-      >
-        Logout
-      </a>
-      }
+        {user?.isLoggedIn === false ? <>
+        <button className={styles.homeButton} onClick={toggle2} type="button" name="show_links">Register</button>
+        <button className={styles.homeButton} onClick={toggle} type="button" name="show_login">Log In</button>
+        </>
+        :
+        <a
+          className={styles.homeButton}
+          href="/api/logout"
+          onClick={async (e) => {
+            e.preventDefault()
+            await mutateUser(fetchJson('/api/logout'))
+            router.push('/')
+          }}
+        >
+          Logout
+        </a>
+        }
       </nav>
       <main className={styles.main}>
         <h1 className={styles.title}>
