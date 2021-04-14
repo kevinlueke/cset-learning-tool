@@ -74,12 +74,16 @@ export default function Course ({ courseData, courseList, conceptList }) {
     return <p>Loading...</p>
   }
 
-  function handleEdit (e) {
+  const handleHomeClick = (e) => {
+    Router.push('/')
+  }
+
+  const handleEdit = (e) => {
     setEditMode(e.currentTarget.value)
   }
 
 
-  function handleSubmit (e) {
+  const handleSubmit = (e) => {
     e.preventDefault()
 
     const body = {
@@ -132,6 +136,7 @@ export default function Course ({ courseData, courseList, conceptList }) {
         <title>{courseData.name_short}</title>
       </Head>
       <h1 className={styles.pageTitle}>{courseData.name_short}: {courseData.name_full}</h1>
+      <button className={styles.homeButton} onClick={handleHomeClick} type='button'>Home</button>
 
       <aside className={styles.courseAside}>
         {courseItems}
