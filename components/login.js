@@ -1,12 +1,17 @@
 import { useState } from 'react'
 import useUser from '../lib/useUser'
 import fetchJson from '../lib/fetchJson'
+import styles from '../styles/Home.module.css'
 
-export default function LoginForm(){
+export default function LoginForm({ onToggle }){
   const { mutateUser } = useUser({
     redirectTo: '/test',
     redirectIfFound: true,
   })
+
+  const handleToggle = (e) => {
+    onToggle(false)
+  }
 
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -35,6 +40,7 @@ export default function LoginForm(){
 
   return(
     <form onSubmit={handleSubmit}>
+      <button type='button' onClick={handleToggle} className={styles.close}>X</button>
       <label>Email:
         <input name="email" type="text" autoComplete="email" required />
       </label>

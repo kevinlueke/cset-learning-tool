@@ -78,13 +78,13 @@ export default function Home({courseData}) {
         </p>
         {showRegister ?
           <section className={styles.homeForm}>
-          <RegisterForm/>
+          <RegisterForm onToggle={setShowRegister} />
           </section>
          : []
         }
         {showLogin ?
           <section className={styles.homeForm}>
-            <LoginForm/>
+            <LoginForm onToggle={setShowLogin}/>
           </section>
           : []}
         <section className={styles.courseContainer}>
