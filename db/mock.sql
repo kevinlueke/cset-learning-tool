@@ -16,7 +16,7 @@ VALUES ('admin@email.com', '$2a$10$p/hp8mtwqln9uheDMaclKe831v9Vcn4z28ic2KD9aDk0u
        ('teacher@email.com', '$2a$10$96m0FZgpexDOt/m29BndcObQ/igLPBnk4tmuwd1Gh9koufPnEYWaG', 'theresa', 'teacher', NULL, 2, TRUE),
        ('student1@email.com', '$2a$10$GfFUkkG1coAFtfeu6e8KZ.NokNtx5pXEckx2LPKK8CfNGMvKnvaYC', 'siobhan', 'student', 1, 3, TRUE),
        ('student2@email.com', '$2a$10$Rq3fh6F042DrgPwDcWjN4OJd5.T8cHisM83RJQisHk9lmMbtZ9gI2', 'silas', 'student', 2, 3, TRUE),
-       ('student3@email.com', '$2a$10$JH.ZTwR/vhYevxVAbr4U3O06PpYA1tnPI/pDd6jA68J3Wk2qWNhzi', 'sam', 'student', 3, 3, FALSE);
+       ('student3@email.com', '$2a$10$JH.ZTwR/vhYevxVAbr4U3O06PpYA1tnPI/pDd6jA68J3Wk2qWNhzi', 'sam', 'student', NULL, NULL, FALSE);
 
 INSERT INTO courses (name_short, name_full)
 VALUES ('CSET 105', 'Intro to Web Applications'),
