@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import useUser from '../lib/useUser'
 import fetchJson from '../lib/fetchJson'
+import styles from '../styles/Home.module.css'
 
-export default function LoginForm(){
-  const { mutateUser } = useUser({
-    redirectTo: '/test',
-    redirectIfFound: true,
-  })
+export default function LoginForm({ onToggle }){
+  const { mutateUser } = useUser({})
+
+  const handleToggle = (e) => {
+    onToggle(false)
+  }
 
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -26,6 +28,7 @@ export default function LoginForm(){
           body: JSON.stringify(body),
         })
       )
+      onToggle(false)
     } catch (error) {
       console.error('An unexpected error happened:', error)
       setErrorMsg(error.data.message)
@@ -35,6 +38,7 @@ export default function LoginForm(){
 
   return(
     <form onSubmit={handleSubmit}>
+      <button type='button' onClick={handleToggle} className={styles.close}>X</button>
       <label>Email:
         <input name="email" type="text" autoComplete="email" required />
       </label>

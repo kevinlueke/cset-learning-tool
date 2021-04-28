@@ -1,7 +1,12 @@
 import { useState } from 'react'
 import fetchJson from '../lib/fetchJson'
+import styles from '../styles/Home.module.css'
 
-export default function RegisterForm() {
+export default function RegisterForm({ onToggle }) {
+
+  const handleToggle = (e) => {
+    onToggle(false)
+  }
 
   const bcrypt = require('bcryptjs')
   const [errorMsg, setErrorMsg] = useState('')
@@ -40,6 +45,7 @@ export default function RegisterForm() {
 
   return(
     <form onSubmit={handleSubmit}>
+      <button type='button' onClick={handleToggle} className={styles.close}>X</button>
       <label>First Name
         <input name="first_name" type="text" autoComplete="given-name" required />
       </label>

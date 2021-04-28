@@ -1,7 +1,35 @@
 .pageTitle {
   color: #eefbfb;
   margin-left:35vw;
-  margin-bottom: 10rem;
+  margin-bottom: 4rem;
+}
+
+.homeButton {
+  display: inline-block;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 7rem;
+  border: none;
+  padding: 1rem 2rem;
+  margin: 0;
+  text-decoration: none;
+  background: #203647;
+  color: #eefbfb;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 150ms ease;
+}
+
+.homeButton:hover {
+  background-color: #4da8da;
+  color: #203647;
+  box-shadow: 0 0 5px 3px #eefbfb;
+}
+
+.homeButton:active {
+  transform: scale(0.99);
 }
 
 .courseAside, .courseAside2 {
@@ -58,28 +86,35 @@
   color: #4da8da;
 }
 
+.editArea {
+  width: 64vw;
+}
+
 .courseContent{
   display: flex;
+  width: 70%;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin-left: 34vw;
   margin-right: 1.5rem;
 }
-.courseContent h2 {
+.courseContent > article > h2 {
   color:#eefbfb;
   padding-bottom: 1rem;
   border-bottom: 1px solid white;
   text-align: left;
 }
-.courseContent p {
+
+.conceptBody {
   padding: 40px 20px;
+  width: 64vw;
   background-color:#eefbfb;
-  margin: 5rem 0 5rem 0;
+  margin: 2rem 0 2rem 0;
 }
 
 .courseContent button {
-  margin: 1rem 0 5rem 0;
+  margin: 1rem 0 5rem 0.5vw;
   padding: 10px 20px;
 }
 

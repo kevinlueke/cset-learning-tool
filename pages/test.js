@@ -8,6 +8,6 @@ export default function Test() {
   }
 
   return (
-    <p>Hello {user.name}</p>
+    <p>Hello {user.name} + {user.access}</p>
   )
 }
