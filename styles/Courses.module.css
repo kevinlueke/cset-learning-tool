@@ -4,11 +4,14 @@
   margin-bottom: 4rem;
 }
 
-.homeButton {
-  display: inline-block;
+.nav {
   position: fixed;
   top: 0px;
   right: 0px;
+}
+
+.homeButton {
+  display: inline-block;
   width: 7rem;
   border: none;
   padding: 1rem 2rem;

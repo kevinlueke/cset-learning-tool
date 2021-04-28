@@ -78,6 +78,10 @@ export default function Course ({ courseData, courseList, conceptList }) {
     Router.push('/')
   }
 
+  const handleAdminClick = (e) => {
+    Router.push('/admin')
+  }
+
   const handleEdit = (e) => {
     setEditMode(e.currentTarget.value)
   }
@@ -136,8 +140,12 @@ export default function Course ({ courseData, courseList, conceptList }) {
         <title>{courseData.name_short}</title>
       </Head>
       <h1 className={styles.pageTitle}>{courseData.name_short}: {courseData.name_full}</h1>
-      <button className={styles.homeButton} onClick={handleHomeClick} type='button'>Home</button>
-
+      <nav>
+        <button className={styles.homeButton} onClick={handleHomeClick} type='button'>Home</button>
+        {[1].includes(user.access) &&
+          <button className={styles.homeButton} onClick={handleAdminClick} type='button'>Admin</button>
+        }
+      </nav>
       <aside className={styles.courseAside}>
         {courseItems}
       </aside>

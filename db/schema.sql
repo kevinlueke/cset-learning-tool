@@ -68,3 +68,9 @@ CREATE TABLE student_questions (
   student_id bigint REFERENCES users(id),
   question_id bigint REFERENCES questions(id)
 );
+
+-- Class - course junction for allowing members of a class to view a course
+CREATE TABLE class_courses (
+  class_id bigint REFERENCES classes(id),
+  course_id bigint REFERENCES courses(id)
+);
