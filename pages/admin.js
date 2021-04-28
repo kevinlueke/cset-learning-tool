@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import styles from '../styles/Admin.module.css'
+import homeStyles from '../styles/Home.module.css'
 const db = require('../db')
 import React, { useState } from "react";
 import Router, { useRouter } from 'next/router'
@@ -87,6 +88,10 @@ export default function Admin ({ userData, classData, roleData }) {
     Router.reload()
   }
 
+  const handleHomeClick = (e) => {
+    Router.push('/')
+  }
+
   const roleList = roleData.map((c) =>
     <option key={c.id} value={c.id}>{c.role_name}</option>
   )
@@ -122,7 +127,9 @@ export default function Admin ({ userData, classData, roleData }) {
       <Head>
         <title>Admin Control</title>
       </Head>
-
+      <nav className={styles.nav}>
+        <button className={homeStyles.homeButton} onClick={handleHomeClick} type='button'>Home</button>
+      </nav>
       <form className={styles.form} onSubmit={handleSubmit}>
         <table className={styles.scrollable}>
           <thead>

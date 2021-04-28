@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 const db = require('../db')
 import React, { useState } from "react";
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import RegisterForm from '../components/register'
 import LoginForm from '../components/login'
 import fetchJson from '../lib/fetchJson'
@@ -40,6 +40,10 @@ export default function Home({courseData}) {
     setShowRegister(!showRegister);
   }
 
+  const handleAdminClick = (e) => {
+    Router.push('/admin')
+  }
+
   //map the rows returned in the query of courses
   const conceptItems = courseData.map((c) =>
     <Link href={`/courses/${c.name_short.replaceAll(' ', '_')}`} key={c.id}><a><p>{c.name_short}</p><p><span>{c.name_full}</span></p></a></Link>
@@ -56,17 +60,22 @@ export default function Home({courseData}) {
         <button className={styles.homeButton} onClick={toggle} type="button" name="show_login">Log In</button>
         </>
         :
-        <a
-          className={styles.homeButton}
-          href="/api/logout"
-          onClick={async (e) => {
-            e.preventDefault()
-            await mutateUser(fetchJson('/api/logout'))
-            router.push('/')
-          }}
-        >
-          Logout
-        </a>
+        <>
+          <a
+            className={styles.homeButton}
+            href="/api/logout"
+            onClick={async (e) => {
+              e.preventDefault()
+              await mutateUser(fetchJson('/api/logout'))
+              router.push('/')
+            }}
+          >
+            Logout
+          </a>
+          {[1].includes(user?.access) &&
+            <button className={styles.homeButton} onClick={handleAdminClick} type="button">Admin</button>
+          }
+        </>
         }
       </nav>
       <main className={styles.main}>
