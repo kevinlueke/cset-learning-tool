@@ -3,7 +3,6 @@ import withSession from '../../lib/session'
 export default withSession(async (req, res) => {
   const { roles, classes } = await req.body
   const db = require('../../db')
-  console.log(roles)
 
   const queries = []
 
@@ -14,7 +13,6 @@ export default withSession(async (req, res) => {
     })
   }
 
-  console.log(queries)
   try {
     for (let query of queries) {
       await db.query(query)

@@ -88,6 +88,20 @@ export default function Admin ({ userData, classData, roleData }) {
     Router.reload()
   }
 
+  const handleDeny = async (e) => {
+    const body = {
+      id: event.target.value
+    }
+
+    const res = await fetch('/api/deny', {
+      method: 'POST',
+      headers: { 'Content-type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+
+    Router.reload()
+  }
+
   const handleHomeClick = (e) => {
     Router.push('/')
   }
@@ -119,6 +133,9 @@ export default function Admin ({ userData, classData, roleData }) {
       <td>
         <input id={c.id} defaultChecked={checked[c.id]} name="checkbox" type='checkbox' value={c.id} onClick={handleCheckClick}/>
       </td>
+      <td>
+        <button type="button" name="deny" value={c.id} onClick={handleDeny}>Deny</button>
+      </td>
     </tr>
   )
 
@@ -138,6 +155,7 @@ export default function Admin ({ userData, classData, roleData }) {
               <th>Role</th>
               <th>Class</th>
               <th>Confirm</th>
+              <th>Deny</th>
             </tr>
           </thead>
           <tbody>
