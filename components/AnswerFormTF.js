@@ -47,7 +47,7 @@ export default class AnswerFormTF extends Component {
 
       console.log(body)
 
-      fetch('api/savequestion', {
+      fetch('/api/savequestion', {
         method:'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(body),

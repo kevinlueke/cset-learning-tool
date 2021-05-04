@@ -29,11 +29,12 @@ export default class AnswerFormMC extends Component {
     body.question_result = result
     body.save = save
 
-    fetch('api/savequestion', {
+    fetch('/api/savequestion', {
       method:'POST',
       headers: { 'Content-type': 'application/json' },
       body: JSON.stringify(body),
     })
+    .then(response => response.json())
   }
 
   formSubmit(event) {
