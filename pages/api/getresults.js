@@ -21,7 +21,7 @@ export default withSession(async (req, res) => {
   try {
     const db_res = await db.query(query)
     const results_data = db_res.rows
-    console.log(db_res.rowCount)
+
     res.status(200).json(db_res.rows)
 
   } catch (error) {
