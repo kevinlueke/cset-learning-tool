@@ -4,17 +4,15 @@ import { useState } from 'react';
 import {useRouter} from 'next/router'
 import Link from 'next/link'
 import Carousel from 'react-elastic-carousel';
-import AnswerFormMC from '../components/AnswerFormMC'
-import AnswerFormTF from '../components/AnswerFormTF'
-import QuizResults from '../components/QuizResults'
-import useUser from '../lib/useUser'
-import useCookie from '../lib/useCookie'
-const db = require('../db')
+import AnswerFormMC from '../../components/AnswerFormMC'
+import AnswerFormTF from '../../components/AnswerFormTF'
+import QuizResults from '../../components/QuizResults'
+import useUser from '../../lib/useUser'
+import useCookie from '../../lib/useCookie'
+const db = require('../../db')
 
 export async function getStaticProps () {
 
-  // const router = useRouter()
-  // const {qid} = router.query
   const query = {
     text: "SELECT q.question,q.clue,q.ans,q.res_a,q.res_b,q.res_c,q.res_d,q.id,con.title FROM questions q JOIN concepts con ON q.concept_id = con.id WHERE q.concept_id = $1 ORDER BY random() LIMIT $2",
     values:[1,5],

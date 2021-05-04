@@ -1,22 +1,35 @@
-import useUser from '../lib/useUser'
-import useCookie from '../lib/useCookie'
-import TestCookies from '../components/test-cookies'
+import QuestionDropdown from '../components/CreateEditQuestions'
+import React, { useState } from "react";
+const db = require('../db')
 
-
-export default function Test() {
-  const { user } = useUser( { redirectTo: '/' } )
-  const { cookie } = useCookie({})
-
-  if (!user || user.isLoggedIn === false || !cookie) {
-    return <p>Loading...</p>
+export async function getStaticProps(){
+  const query = {
+    text: 'SELECT id, name_short FROM courses',
   }
+  const query2 = {
+    text: 'SELECT id, title FROM concepts',
+  }
+  try {
+    const res = await db.query(query)
+    const courseData = res.rows
+    return {
+      props: {
+        courseData
+      }
+    }
+  } catch (err) {
+    console.log(err.stack)
+  }
+}
+
+export default function Test({courseData}) {
 
   return (
-<p>Hello {user.name} + {user.access}</p>
+
     <div>
-      <p>Hello {user.name}</p>
-      <TestCookies/>
-      <p>The current cookie is: {cookie.info}</p>
+
+    <QuestionDropdown course_data={courseData}/>
+
     </div>
   )
 }
