@@ -1,0 +1,164 @@
+.container h3{
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  padding: 1rem 0;
+}
+
+.container h5{
+  text-align: center;
+  color: white;
+  font-size: 1.25rem;
+  padding: 1rem 0;
+  margin: 0;
+}
+
+.box{
+  background-color: #203647;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+  padding: 1rem 0;
+}
+
+.box select {
+  background-color: white;
+  color: black;
+  font-size: 1rem;
+  padding: .2rem;
+  width: 18rem;
+}
+
+.main {
+  background-color: white;
+  margin: 3rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 90%;
+}
+
+.main label{
+  background-color: lightgrey;
+  padding: .25rem 0;
+  font-size: .85rem;
+  margin-left: 10%;
+  margin-bottom: 0;
+  margin-top: 1rem;
+  width: 80%;
+}
+
+.main input {
+  padding: .15rem;
+  margin: .25rem auto;
+  margin-top: .25rem;
+  width: 80%;
+  font-size: 1rem;
+}
+
+.main p {
+  text-align: center;
+  font-variant: small-caps;
+  font-weight: bolder;
+  color: red;
+  margin-bottom: 0;
+}
+
+.main button{
+  padding: .25rem;
+  width: 100px;
+  margin: 1rem auto;
+}
+
+.questions form {
+  width: 80%;
+  margin: 0 auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.questions p {
+  color: red;
+  font-variant: small-caps;
+}
+
+.questions table {
+  margin-top: 1rem;
+}
+
+.questions form label{
+  margin-top: 1rem;
+  background-color: lightgrey;
+  padding: .25rem 0;
+  font-size: .85rem;
+}
+
+.option_label{
+  width: 6rem;
+}
+
+.questions{
+  background-color: #203647;
+  width: 90%;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.questions div {
+  margin: 1rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid white;
+}
+
+#content_holder{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#delete_button{
+  background-color: darkred;
+  color: white;
+}
+
+.questions div button{
+  left:0;
+  width: 5rem;
+  background-color: grey;
+  color: white;
+  margin-bottom: 1rem;
+  margin-left: 10%;
+}
+
+.questions div form button {
+  width: 10rem;
+  background-color: grey;
+  color: white;
+}
+.questions form input{
+  font-size: 1rem;
+  border: none;
+  padding: .25rem;
+  margin: .25rem auto;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.questions form table input{
+  width: 100%;
+}
+
+.questions h4{
+  margin-bottom: 0;
+  padding: .5rem;
+}

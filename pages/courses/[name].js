@@ -111,7 +111,7 @@ export default function Course ({ courseData, courseList, conceptList }) {
   )
 
   const conceptBodies = (editMode) => conceptList.map((c) =>
-    <article id={c.id}>
+    <article key={c.id} id={c.id}>
       <h2>{c.title}</h2>
       {editMode && editMode == c.id ?
         <form onSubmit={handleSubmit}>
@@ -124,11 +124,13 @@ export default function Course ({ courseData, courseList, conceptList }) {
         <section>
           <div className={styles.conceptBody} dangerouslySetInnerHTML={{ __html: c.processedBody}} />
           {[1, 2].includes(user.access) &&
-            <button value={c.id} onClick={handleEdit}>Edit</button>
+            <div className={styles.editholder}><button value={c.id} onClick={handleEdit}>edit</button>
+            <Link href={'../quiz/editquestions'}><a>question edit</a></Link></div>
           }
+
         </section>
       }
-
+      <Link href={`/quiz/${c.id}`} key={c.id}><a className={styles.takequiz}>take quiz</a></Link>
     </article>
   )
 

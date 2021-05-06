@@ -1,6 +1,6 @@
-import QuestionDropdown from '../components/CreateEditQuestions'
+import QuestionDropdown from '../../components/CreateEditQuestions'
 import React, { useState } from "react";
-const db = require('../db')
+const db = require('../../db')
 
 export async function getStaticProps(){
   const query = {
