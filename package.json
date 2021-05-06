@@ -17,5 +17,10 @@
     "remark": "^13.0.0",
     "remark-html": "^13.0.1",
     "swr": "^0.5.0"
+  },
+  "devDependencies": {
+    "next-iron-session": "^4.1.12",
+    "react-cookie": "^4.0.3",
+    "react-elastic-carousel": "^0.11.2"
   }
 }

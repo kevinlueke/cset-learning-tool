@@ -125,3 +125,46 @@
   background-color: rgb(100,100,100);
   color: rgb(255,255,255);
 }
+
+.editholder {
+  display: flex;
+  flex-direction: row;
+  height: 2rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.editholder button {
+  font-size: 1rem;
+  font-variant: small-caps;
+  border-top: 2px solid darkgrey;
+  border-left: 2px solid darkgrey;
+  width: 100px;
+  height: 100%;
+  margin:0;
+  background-color: grey;
+  color: white;
+  padding: .2rem;
+}
+.takequiz, .editholder a{
+  font-size: .75rem;
+  font-variant: small-caps;
+  text-align: center;
+  width: 150px;
+  margin-left: .5rem;
+  background-color: grey;
+  color: white;
+  padding:.43rem;
+  border-top: 2px solid darkgrey;
+  border-left: 2px solid darkgrey;
+  border-bottom: 2px solid black;
+  border-right: 2px solid black;
+}
+
+.editholer button:hover, .takequiz:hover, .editholder a:hover {
+  background-color: lightgrey;
+  color: black;
+}
+
+.takequiz {
+  margin-left: 0;
+}

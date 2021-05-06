@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS concepts CASCADE;
 DROP TABLE IF EXISTS questions CASCADE;
 DROP TABLE IF EXISTS classes CASCADE;
 DROP TABLE IF EXISTS student_questions CASCADE;
+DROP TABLE IF EXISTS class_courses CASCADE;
 
 -- Roles
 CREATE TABLE roles (
@@ -45,7 +46,7 @@ CREATE TABLE courses (
 -- Concepts
 CREATE TABLE concepts (
   id bigserial PRIMARY KEY,
-  course_id bigint REFERENCES courses(id) NOT NULL,
+  course_id bigint REFERENCES courses(id) ON DELETE CASCADE NOT NULL,
   title varchar(50) NOT NULL,
   body text NOT NULL
 );
@@ -53,7 +54,7 @@ CREATE TABLE concepts (
 -- Questions
 CREATE TABLE questions (
   id bigserial PRIMARY KEY,
-  concept_id bigint REFERENCES concepts(id) NOT NULL,
+  concept_id bigint REFERENCES concepts(id) ON DELETE CASCADE NOT NULL,
   question text NOT NULL,
   clue text,
   ans varchar(100) NOT NULL,
@@ -65,8 +66,12 @@ CREATE TABLE questions (
 
 -- Student - Questions junction for creating quizzes
 CREATE TABLE student_questions (
-  student_id bigint REFERENCES users(id),
-  question_id bigint REFERENCES questions(id)
+  student_id bigint REFERENCES users(id) ON DELETE CASCADE,
+  question_id bigint REFERENCES questions(id) ON DELETE CASCADE,
+  question_result boolean,
+  save boolean,
+  CONSTRAINT UNIQUE_PAIRS
+	UNIQUE (student_id, question_id)
 );
 
 -- Class - course junction for allowing members of a class to view a course

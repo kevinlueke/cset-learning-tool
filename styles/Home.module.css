@@ -131,7 +131,7 @@
   margin-top: 3rem;
 }
 
-.homeForm form {
+.homeForm form{
   display: flex;
   flex-direction: column;
 }
