@@ -37,7 +37,10 @@ VALUES ('CSET 105', 'Intro to Web Applications'),
 
 INSERT INTO concepts (course_id, title, body)
 VALUES (1, 'Programming Concepts', 'Information about bits, numbers, encoding, etc.'),
-       (1, 'Values, Types, and Operators', 'Information about values, types, operators, etc.');
+       (1, 'Values, Types, and Operators', 'Information about values, types, operators, etc.'),
+       (2, 'A cool CSET 110 topic', 'This is pretty cool, huh?'),
+       (2, 'A VERY cool CSET 110 topic', 'This is where things start to get interesting'),
+       (2, 'Don''t read this', 'If you''re reading this, it''s already too late');
 
 INSERT INTO questions (concept_id, question, clue, ans, res_a, res_b, res_c, res_d)
 VALUES (1, 'What is your quest?', NULL, 'To find the Holy Grail', 'To find the Holy Grail', 'To find the cure for smelling of elderberries', NULL, NULL),
