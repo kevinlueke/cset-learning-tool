@@ -1,5 +1,6 @@
 import QuestionDropdown from '../../components/CreateEditQuestions'
 import React, { useState } from "react";
+import useUser from '../../lib/useUser'
 const db = require('../../db')
 
 export async function getStaticProps(){
@@ -23,6 +24,7 @@ export async function getStaticProps(){
 }
 
 export default function Test({courseData}) {
+  const { user } = useUser({ redirectTo: '/', allowed: [1, 2] })
 
   return (
 
