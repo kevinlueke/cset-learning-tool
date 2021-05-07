@@ -1,6 +1,7 @@
 import QuestionDropdown from '../../components/CreateEditQuestions'
 import React, { useState } from "react";
 import useUser from '../../lib/useUser'
+import styles from '../../styles/Courses.module.css'
 const db = require('../../db')
 
 export async function getStaticProps(){
@@ -26,9 +27,15 @@ export async function getStaticProps(){
 export default function Test({courseData}) {
   const { user } = useUser({ redirectTo: '/', allowed: [1, 2] })
 
+  const handleHomeClick = (e) => {
+    Router.push('/')
+  }
   return (
 
     <div>
+    <nav>
+      <button className={styles.homeButton} onClick={handleHomeClick} type='button'>Home</button>
+    </nav>
 
     <QuestionDropdown course_data={courseData}/>
 
